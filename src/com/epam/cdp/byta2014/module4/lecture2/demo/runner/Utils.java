@@ -52,11 +52,6 @@ public class Utils {
 
         }
 
-        //FileInputStream(String myFile.getName()) throws FileNotFoundException
-        // BufferedReader amount = new BufferedReader(new InputStreamReader(myFile));
-
-        // int amount = 1000;      //Количество игрушек будет теперь вычитываться с XML файла.
-        //int carsAmount = 5000;//(int) ((Math.random() * 50) + 1);  //рандомные числа были убраны, чтобы иметь возможность сравнивать производительность.
         for (int i = 0; i < amount; i++) {
             toyList.add(new Car());
         }
