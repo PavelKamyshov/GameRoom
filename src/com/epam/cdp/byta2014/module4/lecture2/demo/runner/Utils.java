@@ -8,6 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.epam.cdp.byta2014.module4.lecture2.demo.exception.PerformanceException;
+import org.w3c.dom.Document;
+//import sun.plugin.dom.core.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Created by Pavlo_Kamyshov on 9/15/2014.
@@ -23,7 +28,7 @@ public class Utils {
         long startTime = System.currentTimeMillis();
 
 
-        File myFile = new File("data.xml");
+        File myFile = new File("src/data.xml");
         if (!myFile.exists()) {
             System.out.println();
             System.out.println("File with toys amount is NOT found!!!");
@@ -37,7 +42,35 @@ public class Utils {
         try {
             BufferedReader myFileSymbol = new BufferedReader(new FileReader(myFile));
             String str;
+
+            File fXmlFile = new File("src/data.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            doc.getElementsByTagName()
+
+
+           /* NodeList nList = doc.getElementsByTagName("ingredient");
+            for (int i = 0; i< nList.getLength(); i++)
+            {
+                Node nNode = nList.item(i);
+                Ingredient ingredient = new Ingredient();
+                if (nNode.getNodeType() == Node.ELEMENT_NODE)
+                {
+                    Element element = (Element) nNode;
+                    ingredient.setIngredientName(element.getAttribute("name"));
+                    ingredient.setIngredientType(element.getElementsByTagName("type").item(0).getTextContent());
+                    ingredient.setCalories(convertFromStringToInteger(element.getElementsByTagName("calories").item(0).getTextContent()));
+                    ingredient.setProteins(convertFromStringToInteger(element.getElementsByTagName("proteins").item(0).getTextContent()));
+                    ingredient.setFats(convertFromStringToInteger(element.getElementsByTagName("fats").item(0).getTextContent()));
+                    ingredient.setCarbs(convertFromStringToInteger(element.getElementsByTagName("carbs").item(0).getTextContent()));
+                }
+                ingredients.add(ingredient);
+            }*/
+
             while ((str = myFileSymbol.readLine()) != null) {
+
                 if (str.contains("<amount>") && str.contains("</amount>")) {
                     str = str.replace("<amount>", "").replace("</amount>", "");
                     amount = Integer.parseInt(str);
@@ -49,6 +82,16 @@ public class Utils {
 
         } catch (IOException e) {
             System.out.println("Error while working with file!");
+
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("File is not found");
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
 
         }
 
@@ -104,6 +147,7 @@ public class Utils {
                 numberInPlay++;
             }
         }
+
         long diff = System.currentTimeMillis() - startTime;
 
         return diff;
