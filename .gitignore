@@ -3,6 +3,8 @@
 *.iws
 .idea/*
 target/*
+JavaOOPDemo.iml
 
 bin
+out
 .idea
