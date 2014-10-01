@@ -40,44 +40,17 @@ public class Utils {
         }
 
         try {
-            BufferedReader myFileSymbol = new BufferedReader(new FileReader(myFile));
-            String str;
+            //BufferedReader myFileSymbol = new BufferedReader(new FileReader(myFile));
+           // String str;
 
             File fXmlFile = new File("src/data.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
 
-            doc.getElementsByTagName()
+            amount = Integer.parseInt(doc.getElementsByTagName("amount").item(0).getTextContent());  //doc... это Нода, в которой судя по всему может быть много найденных тегов.
 
 
-           /* NodeList nList = doc.getElementsByTagName("ingredient");
-            for (int i = 0; i< nList.getLength(); i++)
-            {
-                Node nNode = nList.item(i);
-                Ingredient ingredient = new Ingredient();
-                if (nNode.getNodeType() == Node.ELEMENT_NODE)
-                {
-                    Element element = (Element) nNode;
-                    ingredient.setIngredientName(element.getAttribute("name"));
-                    ingredient.setIngredientType(element.getElementsByTagName("type").item(0).getTextContent());
-                    ingredient.setCalories(convertFromStringToInteger(element.getElementsByTagName("calories").item(0).getTextContent()));
-                    ingredient.setProteins(convertFromStringToInteger(element.getElementsByTagName("proteins").item(0).getTextContent()));
-                    ingredient.setFats(convertFromStringToInteger(element.getElementsByTagName("fats").item(0).getTextContent()));
-                    ingredient.setCarbs(convertFromStringToInteger(element.getElementsByTagName("carbs").item(0).getTextContent()));
-                }
-                ingredients.add(ingredient);
-            }*/
-
-            while ((str = myFileSymbol.readLine()) != null) {
-
-                if (str.contains("<amount>") && str.contains("</amount>")) {
-                    str = str.replace("<amount>", "").replace("</amount>", "");
-                    amount = Integer.parseInt(str);
-                }
-
-            }
-            myFileSymbol.close();
 
 
         } catch (IOException e) {
@@ -87,6 +60,12 @@ public class Utils {
         catch (NullPointerException e)
         {
             System.out.println("File is not found");
+
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Incorrect amount parameter set in the file!");
+            System.out.println("Working with file was skipped, default value taken");
 
         }
         catch (Exception e)
@@ -117,7 +96,7 @@ public class Utils {
 
     }
 
-    public static long sout(List<Toy> toyList){         //этот метод не только выводит что нам нужно, но и возвращает время поиска по массиву!!!
+    public static long sout(List<Toy> toyList){         //этот метод не только выводит что нам нужно, но и возвращает время поиска по массиву
 
         System.out.println("Here are the prices of " + toyList.size() + " toys in the room:");
 
