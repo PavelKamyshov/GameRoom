@@ -1,0 +1,8 @@
+<!--  Some stolen example -->
+<note>
+	<to>Tove</to>
+	<from>Jani</from>
+	<heading>Reminder</heading>
+	<amount>500</amount>
+	<body>Don't forget me this weekend!</body>
+</note>
